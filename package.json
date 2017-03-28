@@ -1,11 +1,19 @@
 {
   "name": "easysns",
   "version": "1.0.0",
-  "description": "",
+  "description": "a simple sns system",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dabaitu2/Myeasysns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dabaitu2/Myeasysns/issues"
+  },
+  "homepage": "https://github.com/Dabaitu2/Myeasysns#readme"
 }
