@@ -27,6 +27,10 @@ var server = http.createServer(function (req,res) {
     console.log('url:',req.url,'urlInfo',urlInfo);
     var rule = find(rules,function(rule){
         if(rule.path instanceof RegExp){
+            var matchResult = urlInfo.pathname.match(rule.path);
+            if(matchResult){
+                req.params = matchResult;
+            }
             return urlInfo.pathname.match(rule.path);
         }
         return rule.path === urlInfo.pathname;

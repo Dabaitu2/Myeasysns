@@ -13,7 +13,7 @@ var server = http.createServer(function (req,res) {
     var path = join(root,url.pathname);
     fs.stat(path,function (err,stat) {
         if(err){
-            if('ENOENT' == err.code){
+            if('ENOENT' === err.code){
                 res.statusCode = 404;
                 res.end('Not Found');
             }else {
