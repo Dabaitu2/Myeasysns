@@ -1,46 +1,60 @@
 /**
  * Created by tomokokawase on 17-4-6.
  */
-function MemStore() {
-    this.map = {};
+const assert = require('assert');
+// const runner = require('../runner');
+const MemStore = require('../../memstore/memstore');
+
+var memStore = new MemStore();
+// runner([testSet,testGet,testIncr,testDel],function (err) {
+//     if(err){
+//         console.log('err',err.stack);
+//     } else{
+//         console.log('All done');
+//     }
+// });
+
+describe('MemStore',function () {
+    it('could set',testSet);
+    it('could get',testGet);
+    it('could incr',testIncr);
+    it('could del',testDel);
+});
+
+function testSet(done) {
+    memStore.set('foo','bar',function (err,result) {
+        assert(!err,'Should save without error');
+        done();
+    });
 }
 
-module.exports = MemStore;
-
-MemStore.prototype.set = function (key,value,callback) {
-    this.map[key] = value;
-    setImmediate(function () {
-        callback()
+function testGet(done) {
+    memStore.get('foo',function (err,result) {
+        assert(!err,'Should get without error');
+        assert.equal(result,'bar');
+        done();
     });
-};
+}
 
-MemStore.prototype.get = function (key,callback) {
-    var value = this.map[key];
-    setImmediate(function () {
-        callback(null,value);
-    })
-};
-
-MemStore.prototype.del = function (key,callback) {
-    delete this.map[key];
-    setImmediate(function () {
-        callback();
+function testIncr(done) {
+    memStore.incr('id',function (err,result) {
+        assert(!err,'Should incr without error');
+        assert.equal(result,1);
+        memStore.incr('id',function (err,result) {
+            assert(!err, 'Should incr without error');
+            assert.equal(result, 2);
+            done();
+        });
     });
-};
+}
 
-MemStore.prototype.incr =function (key,callback) {
-    var self = this;
-    setImmediate(function () {
-        var value = self.map[key];
-        if(value===undefined){
-            value = 0;
-        }
-        var num = parseInt(value,10);
-        if(Number.isNaN(num)){
-            callback(new Error('INCR:Wrong type of value'));
-            return;
-        }
-        self.map[key] = ++num;
-        callback(null,num);
+function testDel(done) {
+    memStore.del('foo',function (err,result) {
+        assert(!err,'Should del without error');
+        memStore.get('foo',function (err,result) {
+            assert(!err,'Should get without error');
+            assert.equal(result,null);
+            done();
+        });
     });
-};
+}

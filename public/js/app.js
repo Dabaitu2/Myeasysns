@@ -2,7 +2,7 @@
  * Created by tomokokawase on 17-3-28.
  */
 var http = require('http');
-var controllers = require('./controllers');
+var controllers = require('./../../controllers/index');
 //require will use the index.js(if exists)firstly
 var parseUrl = require('url').parse;
 
