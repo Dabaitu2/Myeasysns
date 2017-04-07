@@ -17,6 +17,7 @@ function find(ary,match) {
     }
 }
 const rules = [
+    {path:'/play',controller:controllers.play},
     {path:'/',controller:controllers.home},
     {path:'/user',controller:controllers.user},
     {path:'/auth/register',controller:controllers.auth.register},

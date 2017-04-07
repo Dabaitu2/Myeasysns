@@ -17,7 +17,8 @@ BaseModel.prototype.get = function (id,callback) {
 };
 
 BaseModel.prototype.update = function (id,obj,callback) {
-    this.store.set(this.prefix+id,obj.callback);
+    this.store.set(this.prefix+id,obj,callback);
+    // this.store.set(this.prefix+id,obj.callback);
 };
 
 BaseModel.prototype.del = function (id,callback) {

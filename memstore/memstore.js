@@ -10,7 +10,7 @@ module.exports = MemStore;
 MemStore.prototype.set = function (key,value,callback) {
     this.map[key] = value;
     setImmediate(function () {
-        callback()
+        callback();
     });
 };
 
